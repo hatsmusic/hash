@@ -1,2718 +1,993 @@
 <!DOCTYPE html>
-<html lang="zh" data-theme="midnight">
+<html lang="en" data-theme="midnight" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#07060a">
+<meta name="theme-color" content="#07060a" id="metaThemeColor">
 <title>hashwager.win</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{
-  --bg:#07060a;--panel:rgba(18,16,22,.82);--panel-solid:#121016;
-  --line:rgba(232,196,138,.14);--line2:rgba(255,255,255,.08);
-  --text:#f6f1e7;--muted:#9a9184;--soft:#6d655c;
-  --gold:#e7c27a;--gold2:#b8894a;--cyan:#7fd7ff;--green:#3ddea0;--red:#ff6d7a;--amber:#ffd36a;
-  --glow:rgba(212,168,92,.18);--shadow:0 24px 70px rgba(0,0,0,.45);--nav:78px;
-}
-html[data-theme="dark"]{
-  --bg:#0b0c10;--panel:rgba(18,20,28,.88);--panel-solid:#12141c;
-  --gold:#d7deee;--gold2:#8f9bb8;--glow:rgba(140,160,220,.16)
-}
-html[data-theme="light"]{
-  --bg:#f4efe6;--panel:rgba(255,252,247,.9);--panel-solid:#fffdf8;
-  --line:rgba(90,60,20,.12);--line2:rgba(40,30,10,.08);
-  --text:#1c160f;--muted:#6f6558;--soft:#9a8f80;
-  --shadow:0 18px 40px rgba(80,50,10,.1)
-}
-html[data-theme="aurora"]{
-  --bg:#04110f;--panel:rgba(8,28,26,.84);--panel-solid:#071c1a;
-  --gold:#7dffe0;--gold2:#4ea8ff;--glow:rgba(80,230,190,.16);
-  --line:rgba(90,255,210,.14)
-}
+:root{--bg:#07060a;--panel:rgba(18,16,22,.82);--panel-solid:#121016;--line:rgba(232,196,138,.14);--line2:rgba(255,255,255,.08);--text:#f6f1e7;--muted:#9a9184;--soft:#6d655c;--gold:#e7c27a;--gold2:#b8894a;--cyan:#7fd7ff;--green:#3ddea0;--red:#ff6d7a;--amber:#ffd36a;--glow:rgba(212,168,92,.18);--shadow:0 24px 70px rgba(0,0,0,.45);--nav:78px;--nav-bg:rgba(10,9,12,.92);--meta:#07060a}
+html[data-theme="dark"]{--bg:#0b0c10;--panel:rgba(18,20,28,.88);--panel-solid:#12141c;--gold:#d7deee;--gold2:#8f9bb8;--glow:rgba(140,160,220,.16);--nav-bg:rgba(12,14,20,.92);--meta:#0b0c10}
+html[data-theme="light"]{--bg:#f4efe6;--panel:rgba(255,252,247,.9);--panel-solid:#fffdf8;--line:rgba(90,60,20,.12);--line2:rgba(40,30,10,.08);--text:#1c160f;--muted:#6f6558;--soft:#9a8f80;--shadow:0 18px 40px rgba(80,50,10,.1);--nav-bg:rgba(255,252,247,.92);--meta:#f4efe6}
+html[data-theme="aurora"]{--bg:#04110f;--panel:rgba(8,28,26,.84);--panel-solid:#071c1a;--gold:#7dffe0;--gold2:#4ea8ff;--glow:rgba(80,230,190,.16);--line:rgba(90,255,210,.14);--nav-bg:rgba(4,20,18,.92);--meta:#04110f}
 html,body{min-height:100%}
-body{
-  background:
-    radial-gradient(circle at 12% -8%,var(--glow),transparent 36%),
-    radial-gradient(circle at 100% 80%,rgba(80,140,255,.08),transparent 32%),
-    var(--bg);
-  color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif
-}
+body{background:radial-gradient(circle at 12% -8%,var(--glow),transparent 36%),radial-gradient(circle at 100% 80%,rgba(80,140,255,.08),transparent 32%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif}
 button,a{font:inherit;color:inherit;text-decoration:none}
 button{cursor:pointer;border:0;background:none}
-
-.bg{
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  overflow:hidden
-}
-.bg i{
-  position:absolute;
-  width:2px;
-  height:2px;
-  border-radius:50%;
-  background:var(--gold);
-  opacity:.35;
-  box-shadow:0 0 8px var(--gold);
-  animation:float linear infinite
-}
-@keyframes float{
-  from{transform:translateY(18vh);opacity:0}
-  20%{opacity:.45}
-  to{transform:translateY(-110vh);opacity:0}
-}
-
-.app{
-  position:relative;
-  z-index:1;
-  width:min(680px,100%);
-  margin:auto;
-  padding:14px 14px calc(var(--nav) + 18px)
-}
-.topbar{
-  position:sticky;
-  top:0;
-  z-index:20;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:8px 2px 12px;
-  background:linear-gradient(to bottom,var(--bg),transparent)
-}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg i{position:absolute;width:2px;height:2px;border-radius:50%;background:var(--gold);opacity:.35;box-shadow:0 0 8px var(--gold);animation:float linear infinite}
+@keyframes float{from{transform:translateY(18vh);opacity:0}20%{opacity:.45}to{transform:translateY(-110vh);opacity:0}}
+.app{position:relative;z-index:1;width:min(680px,100%);margin:auto;padding:14px 14px calc(var(--nav) + 18px)}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:8px 2px 12px;background:linear-gradient(to bottom,var(--bg),transparent)}
 .brand{display:flex;align-items:center;gap:10px}
-.logo{
-  width:40px;
-  height:40px;
-  border-radius:13px;
-  display:grid;
-  place-items:center;
-  font-size:12px;
-  font-weight:900;
-  color:#1a1208;
-  background:linear-gradient(145deg,var(--gold),var(--gold2));
-  box-shadow:0 8px 22px var(--glow)
-}
+.logo{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;font-size:12px;font-weight:900;color:#1a1208;background:linear-gradient(145deg,var(--gold),var(--gold2));box-shadow:0 8px 22px var(--glow)}
 .brand strong{display:block;font-size:14px}
-.brand span{
-  display:block;
-  margin-top:2px;
-  color:var(--muted);
-  font-size:9px;
-  letter-spacing:1.6px
-}
+.brand span{display:block;margin-top:2px;color:var(--muted);font-size:9px;letter-spacing:1.6px}
 .tools{display:flex;gap:7px}
-.tool{
-  min-width:36px;
-  height:36px;
-  padding:0 10px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:var(--panel);
-  color:var(--muted);
-  font-size:11px;
-  font-weight:800
-}
-
+.tool{min-width:36px;height:36px;padding:0 10px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--muted);font-size:11px;font-weight:800}
 .view{display:none}
 .view.on{display:block}
-
-.hero{
-  position:relative;
-  overflow:hidden;
-  border:1px solid var(--line);
-  border-radius:28px;
-  padding:22px 16px 16px;
-  background:
-    linear-gradient(165deg,rgba(255,220,160,.08),transparent 42%),
-    var(--panel);
-  box-shadow:var(--shadow)
-}
-.eyebrow{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  color:var(--gold);
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:2.4px
-}
-.dot{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 10px var(--green);
-  animation:pulse 1.5s infinite
-}
-@keyframes pulse{
-  50%{opacity:.35;transform:scale(.7)}
-}
-.hero h1{
-  text-align:center;
-  margin-top:10px;
-  font-size:22px;
-  letter-spacing:-.4px
-}
-.sub{
-  text-align:center;
-  margin-top:5px;
-  color:var(--muted);
-  font-size:11px
-}
-.chips{
-  display:flex;
-  justify-content:center;
-  gap:6px;
-  margin-top:12px
-}
-.chip{
-  padding:4px 8px;
-  border:1px solid var(--line2);
-  border-radius:99px;
-  color:var(--muted);
-  font-size:8px;
-  letter-spacing:.7px
-}
-.round{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:10px;
-  margin-top:16px;
-  padding:12px;
-  border:1px solid var(--line2);
-  border-radius:16px;
-  background:rgba(0,0,0,.16)
-}
-.round small,.cd small{
-  color:var(--muted);
-  font-size:9px;
-  letter-spacing:1px;
-  text-transform:uppercase
-}
-.round b{
-  display:block;
-  margin-top:3px;
-  font-size:18px;
-  font-variant-numeric:tabular-nums
-}
+.hero{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:28px;padding:22px 16px 16px;background:linear-gradient(165deg,rgba(255,220,160,.08),transparent 42%),var(--panel);box-shadow:var(--shadow)}
+.eyebrow{display:flex;justify-content:center;align-items:center;gap:8px;color:var(--gold);font-size:9px;font-weight:800;letter-spacing:2.4px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.5s infinite}
+@keyframes pulse{50%{opacity:.35;transform:scale(.7)}}
+.hero h1{text-align:center;margin-top:10px;font-size:22px;letter-spacing:-.4px}
+.sub{text-align:center;margin-top:5px;color:var(--muted);font-size:11px}
+.chips{display:flex;justify-content:center;gap:6px;margin-top:12px;flex-wrap:wrap}
+.chip{padding:4px 8px;border:1px solid var(--line2);border-radius:99px;color:var(--muted);font-size:8px;letter-spacing:.7px}
+.round{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:16px;padding:12px;border:1px solid var(--line2);border-radius:16px;background:rgba(0,0,0,.16)}
+.round small,.cd small{color:var(--muted);font-size:9px;letter-spacing:1px;text-transform:uppercase}
+.round b{display:block;margin-top:3px;font-size:18px;font-variant-numeric:tabular-nums}
 .cd{text-align:right}
-.cd strong{
-  display:block;
-  margin-top:2px;
-  color:var(--gold);
-  font-size:18px;
-  font-variant-numeric:tabular-nums
-}
-.bar{
-  height:3px;
-  margin-top:10px;
-  border-radius:99px;
-  background:rgba(255,255,255,.06);
-  overflow:hidden
-}
-.bar i{
-  display:block;
-  height:100%;
-  width:100%;
-  background:linear-gradient(90deg,var(--gold2),var(--gold),var(--cyan));
-  transition:width 1s linear
-}
-.result{
-  margin-top:12px;
-  padding:18px 12px 14px;
-  border:1px solid var(--line);
-  border-radius:20px;
-  text-align:center;
-  background:radial-gradient(circle at 50% 0,rgba(231,194,122,.16),transparent 55%)
-}
-.result em{
-  display:block;
-  color:var(--muted);
-  font-style:normal;
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:2px
-}
-.cell{
-  height:92px;
-  margin:10px auto 8px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:1px solid var(--line2);
-  border-radius:16px;
-  background:rgba(0,0,0,.2)
-}
-.num{
-  font-size:64px;
-  font-weight:900;
-  letter-spacing:10px;
-  font-variant-numeric:tabular-nums;
-  background:linear-gradient(135deg,#fff,var(--gold) 55%,#fff1c8);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent
-}
-html[data-theme="light"] .num{
-  background:linear-gradient(135deg,#1c160f,#a56b28);
-  -webkit-background-clip:text;
-  background-clip:text
-}
-.num.wait{
-  color:var(--soft);
-  background:none;
-  -webkit-text-fill-color:var(--soft);
-  animation:blink 1.1s infinite
-}
-@keyframes blink{
-  50%{opacity:.4}
-}
-.cell.draw .num{
-  animation:shake .12s linear infinite
-}
-@keyframes shake{
-  50%{filter:blur(1.5px)}
-}
-.cell.final{
-  border-color:rgba(61,222,160,.35)
-}
-.status{
-  font-size:11px;
-  color:var(--amber)
-}
+html[dir="rtl"] .cd{text-align:left}
+.cd strong{display:block;margin-top:2px;color:var(--gold);font-size:18px;font-variant-numeric:tabular-nums}
+.bar{height:3px;margin-top:10px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}
+.bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--gold2),var(--gold),var(--cyan));transition:width 1s linear}
+.result{margin-top:12px;padding:18px 12px 14px;border:1px solid var(--line);border-radius:20px;text-align:center;background:radial-gradient(circle at 50% 0,rgba(231,194,122,.16),transparent 55%)}
+.result em{display:block;color:var(--muted);font-style:normal;font-size:9px;font-weight:800;letter-spacing:2px}
+.cell{height:92px;margin:10px auto 8px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line2);border-radius:16px;background:rgba(0,0,0,.2)}
+.num{font-size:64px;font-weight:900;letter-spacing:10px;font-variant-numeric:tabular-nums;background:linear-gradient(135deg,#fff,var(--gold) 55%,#fff1c8);-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-theme="light"] .num{background:linear-gradient(135deg,#1c160f,#a56b28);-webkit-background-clip:text;background-clip:text}
+.num.wait{color:var(--soft);background:none;-webkit-text-fill-color:var(--soft);animation:blink 1.1s infinite}
+@keyframes blink{50%{opacity:.4}}
+.cell.draw .num{animation:shake .12s linear infinite}
+@keyframes shake{50%{filter:blur(1.5px)}}
+.cell.final{border-color:rgba(61,222,160,.35)}
+.status{font-size:11px;color:var(--amber)}
 .status.ok{color:var(--green)}
 .status.err{color:var(--red)}
-
-.traits{
-  display:flex;
-  justify-content:center;
-  gap:6px;
-  margin-top:10px
-}
-.trait{
-  min-width:52px;
-  padding:5px 8px;
-  border-radius:999px;
-  border:1px solid var(--line2);
-  color:var(--muted);
-  font-size:10px
-}
-.trait b{
-  color:var(--text);
-  font-weight:750
-}
-.home-note{
-  margin-top:18px;
-  text-align:center;
-  color:var(--soft);
-  font-size:11px
-}
-
+.traits{display:flex;justify-content:center;gap:6px;margin-top:10px;flex-wrap:wrap}
+.trait{min-width:52px;padding:5px 8px;border-radius:999px;border:1px solid var(--line2);color:var(--muted);font-size:10px}
+.trait b{color:var(--text);font-weight:750}
+.home-note{margin-top:18px;text-align:center;color:var(--soft);font-size:11px}
 .section{margin-top:22px}
-.head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:0 2px 8px;
-  color:var(--muted);
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:1.4px
-}
-.card{
-  border:1px solid var(--line2);
-  border-radius:16px;
-  background:var(--panel);
-  overflow:hidden
-}
-.row{
-  padding:12px 13px;
-  border-bottom:1px solid var(--line2)
-}
+.head{display:flex;justify-content:space-between;align-items:center;margin:0 2px 8px;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:1.4px;gap:8px}
+.card{border:1px solid var(--line2);border-radius:16px;background:var(--panel);overflow:hidden}
+.row{padding:12px 13px;border-bottom:1px solid var(--line2)}
 .row:last-child{border-bottom:0}
-.row span{
-  display:block;
-  margin-bottom:4px;
-  color:var(--muted);
-  font-size:10px
-}
-.row div,.mono{
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  font-size:11px;
-  line-height:1.5;
-  word-break:break-all
-}
+.row span{display:block;margin-bottom:4px;color:var(--muted);font-size:10px}
+.row div,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;line-height:1.5;word-break:break-all}
 .copy{cursor:pointer}
-
-.grid3{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px
-}
-.chain{
-  padding:12px 8px;
-  border:1px solid var(--line2);
-  border-radius:14px;
-  background:var(--panel);
-  min-width:0
-}
-.chain b{
-  display:block;
-  font-size:11px
-}
-.chain small{
-  color:var(--muted);
-  font-size:9px
-}
-.hash{
-  margin-top:8px;
-  color:var(--soft);
-  font-size:9px;
-  font-family:ui-monospace,monospace;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis
-}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.chain{padding:12px 8px;border:1px solid var(--line2);border-radius:14px;background:var(--panel);min-width:0}
+.chain b{display:block;font-size:11px}
+.chain small{color:var(--muted);font-size:9px}
+.hash{margin-top:8px;color:var(--soft);font-size:9px;font-family:ui-monospace,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .formula{padding:14px}
-.formula p{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  margin-top:8px;
-  font-size:11px;
-  color:var(--muted)
-}
-.formula code{
-  color:var(--text);
-  font-size:10px;
-  text-align:right
-}
-.verify{
-  margin-top:14px;
-  padding:16px;
-  border:1px solid rgba(61,222,160,.2);
-  border-radius:16px;
-  text-align:center;
-  background:var(--panel)
-}
-.verify p{
-  margin:6px 0 12px;
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.6
-}
-.btn{
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:1px solid var(--line);
-  color:var(--text);
-  background:linear-gradient(135deg,rgba(231,194,122,.16),rgba(127,215,255,.06));
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:.6px
-}
-
+.formula p{display:flex;justify-content:space-between;gap:12px;margin-top:8px;font-size:11px;color:var(--muted)}
+.formula code{color:var(--text);font-size:10px;text-align:right}
+.verify{margin-top:14px;padding:16px;border:1px solid rgba(61,222,160,.2);border-radius:16px;text-align:center;background:var(--panel)}
+.verify p{margin:6px 0 12px;color:var(--muted);font-size:11px;line-height:1.6}
+.btn{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);color:var(--text);background:linear-gradient(135deg,rgba(231,194,122,.16),rgba(127,215,255,.06));font-size:12px;font-weight:800;letter-spacing:.6px}
 .history{display:flex;flex-direction:column}
-.hitem{
-  display:grid;
-  grid-template-columns:72px 54px 1fr;
-  gap:8px;
-  align-items:center;
-  padding:9px 12px;
-  border-bottom:1px solid var(--line2);
-  color:var(--muted);
-  font-size:11px
-}
+.hitem{display:grid;grid-template-columns:72px 54px 1fr;gap:8px;align-items:center;padding:9px 12px;border-bottom:1px solid var(--line2);color:var(--muted);font-size:11px}
 .hitem:last-child{border-bottom:0}
-.hitem strong{
-  color:var(--text);
-  font-variant-numeric:tabular-nums;
-  letter-spacing:1px
-}
-.tags{
-  display:flex;
-  gap:4px;
-  justify-content:flex-end
-}
-.tag{
-  padding:2px 6px;
-  border-radius:99px;
-  background:rgba(255,255,255,.04);
-  font-size:10px
-}
-
-.sponsors{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px
-}
-.sp{
-  display:flex;
-  gap:8px;
-  align-items:center;
-  min-width:0;
-  padding:11px;
-  border:1px solid var(--line2);
-  border-radius:14px;
-  background:var(--panel)
-}
-.mark{
-  width:34px;
-  height:34px;
-  border-radius:10px;
-  display:grid;
-  place-items:center;
-  color:#1a1208;
-  font-size:10px;
-  font-weight:900;
-  background:linear-gradient(145deg,var(--a,#e7c27a),var(--b,#b8894a))
-}
-.sp strong,.sp span{
-  display:block;
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow:ellipsis
-}
+.hitem strong{color:var(--text);font-variant-numeric:tabular-nums;letter-spacing:1px}
+.tags{display:flex;gap:4px;justify-content:flex-end;flex-wrap:wrap}
+html[dir="rtl"] .tags{justify-content:flex-start}
+.tag{padding:2px 6px;border-radius:99px;background:rgba(255,255,255,.04);font-size:10px}
+.sponsors{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sp{display:flex;gap:8px;align-items:center;min-width:0;padding:11px;border:1px solid var(--line2);border-radius:14px;background:var(--panel)}
+.mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#1a1208;font-size:10px;font-weight:900;background:linear-gradient(145deg,var(--a,#e7c27a),var(--b,#b8894a));flex:0 0 auto}
+.sp strong,.sp span{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .sp strong{font-size:11px}
-.sp span{
-  margin-top:2px;
-  color:var(--muted);
-  font-size:9px
-}
-.feed{
-  margin-top:8px;
-  color:var(--soft);
-  font-size:10px
-}
-
-.footer{
-  margin-top:22px;
-  padding-top:14px;
-  border-top:1px solid var(--line2);
-  text-align:center;
-  color:var(--soft);
-  font-size:10px;
-  line-height:1.7
-}
+.sp span{margin-top:2px;color:var(--muted);font-size:9px}
+.feed{margin-top:8px;color:var(--soft);font-size:10px}
+.footer{margin-top:22px;padding-top:14px;border-top:1px solid var(--line2);text-align:center;color:var(--soft);font-size:10px;line-height:1.7}
 .footer a{color:var(--muted)}
-
-.nav{
-  position:fixed;
-  z-index:30;
-  left:50%;
-  bottom:0;
-  transform:translateX(-50%);
-  width:min(680px,100%);
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  padding:8px 10px calc(8px + env(safe-area-inset-bottom));
-  border-top:1px solid var(--line);
-  background:rgba(10,9,12,.92);
-  backdrop-filter:blur(16px)
-}
-.nav button{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:3px;
-  color:var(--soft);
-  font-size:10px
-}
+.nav{position:fixed;z-index:30;left:50%;bottom:0;transform:translateX(-50%);width:min(680px,100%);display:grid;grid-template-columns:repeat(3,1fr);padding:8px 10px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.nav button{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--soft);font-size:10px}
 .nav button.on{color:var(--gold)}
-.nav svg{
-  width:18px;
-  height:18px
-}
-
-.mask{
-  position:fixed;
-  inset:0;
-  z-index:40;
-  background:rgba(0,0,0,.46);
-  opacity:0;
-  pointer-events:none;
-  transition:.2s
-}
-.mask.on{
-  opacity:1;
-  pointer-events:auto
-}
-.side{
-  position:fixed;
-  z-index:41;
-  top:0;
-  right:0;
-  width:min(340px,88vw);
-  height:100%;
-  padding:18px 14px 24px;
-  background:var(--panel-solid);
-  border-left:1px solid var(--line);
-  transform:translateX(104%);
-  transition:.24s;
-  overflow:auto
-}
+.nav svg{width:18px;height:18px}
+.mask{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.46);opacity:0;pointer-events:none;transition:.2s}
+.mask.on{opacity:1;pointer-events:auto}
+.side{position:fixed;z-index:41;top:0;right:0;width:min(340px,88vw);height:100%;padding:18px 14px 24px;background:var(--panel-solid);border-left:1px solid var(--line);transform:translateX(104%);transition:.24s;overflow:auto}
+html[dir="rtl"] .side{right:auto;left:0;border-left:0;border-right:1px solid var(--line);transform:translateX(-104%)}
 .side.on{transform:none}
+html[dir="rtl"] .side.on{transform:none}
 .side h2{font-size:18px}
-.side p{
-  margin-top:6px;
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.6
-}
-.side .close{
-  position:absolute;
-  top:14px;
-  right:14px;
-  width:34px;
-  height:34px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  color:var(--muted)
-}
-.side-links{
-  display:grid;
-  gap:8px;
-  margin-top:18px
-}
-.side-links a,.side-links button{
-  padding:13px;
-  border:1px solid var(--line2);
-  border-radius:13px;
-  background:var(--panel);
-  text-align:left;
-  color:var(--muted);
-  font-size:11px
-}
-
-.sheet{
-  position:fixed;
-  z-index:45;
-  left:50%;
-  bottom:0;
-  width:min(680px,100%);
-  padding:18px 16px calc(18px + env(safe-area-inset-bottom));
-  border:1px solid var(--line);
-  border-bottom:0;
-  border-radius:22px 22px 0 0;
-  background:var(--panel-solid);
-  transform:translate(-50%,110%);
-  transition:.24s
-}
+.side p{margin-top:6px;color:var(--muted);font-size:11px;line-height:1.6}
+.side .close{position:absolute;top:14px;right:14px;width:34px;height:34px;border:1px solid var(--line);border-radius:10px;color:var(--muted)}
+html[dir="rtl"] .side .close{right:auto;left:14px}
+.side-links{display:grid;gap:8px;margin-top:18px}
+.side-links a,.side-links button{padding:13px;border:1px solid var(--line2);border-radius:13px;background:var(--panel);text-align:left;color:var(--muted);font-size:11px}
+html[dir="rtl"] .side-links a,html[dir="rtl"] .side-links button{text-align:right}
+.sheet{position:fixed;z-index:45;left:50%;bottom:0;width:min(680px,100%);padding:18px 16px calc(18px + env(safe-area-inset-bottom));border:1px solid var(--line);border-bottom:0;border-radius:22px 22px 0 0;background:var(--panel-solid);transform:translate(-50%,110%);transition:.24s}
 .sheet.on{transform:translate(-50%,0)}
-.sheet-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center
-}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .sheet-head strong{font-size:14px}
-.sheet-head button{
-  width:32px;
-  height:32px;
-  border:1px solid var(--line);
-  border-radius:9px;
-  color:var(--muted)
-}
-.sheet-body{
-  margin-top:12px;
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.7
-}
-
-.toast{
-  position:fixed;
-  z-index:60;
-  left:50%;
-  bottom:calc(var(--nav) + 18px);
-  transform:translate(-50%,20px);
-  padding:8px 13px;
-  border:1px solid var(--line);
-  border-radius:99px;
-  background:var(--panel-solid);
-  color:var(--text);
-  font-size:10px;
-  opacity:0;
-  pointer-events:none;
-  transition:.2s
-}
-.toast.on{
-  opacity:1;
-  transform:translate(-50%,0)
-}
-.empty{
-  padding:18px;
-  text-align:center;
-  color:var(--soft);
-  font-size:10px
-}
-
-@media(max-width:520px){
-  .grid3{grid-template-columns:1fr}
-  .sponsors{grid-template-columns:1fr}
-  .num{
-    font-size:56px;
-    letter-spacing:8px
-  }
-}
+.sheet-head button{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;color:var(--muted);flex:0 0 auto}
+.sheet-body{margin-top:12px;color:var(--muted);font-size:11px;line-height:1.7;max-height:60vh;overflow:auto;overscroll-behavior:contain}
+.sheet-body .mono{color:var(--text)}
+.lang-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.lang-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:11px 12px;border:1px solid var(--line2);border-radius:12px;background:var(--panel);color:var(--muted);font-size:12px;text-align:left;min-width:0}
+html[dir="rtl"] .lang-item{text-align:right}
+.lang-item.on{border-color:var(--gold);color:var(--text)}
+.lang-item .lang-code{font-size:9px;color:var(--soft);font-family:ui-monospace,monospace;letter-spacing:.5px;flex:0 0 auto}
+.lang-item.on .lang-code{color:var(--gold)}
+.toast{position:fixed;z-index:60;left:50%;bottom:calc(var(--nav) + 18px);transform:translate(-50%,20px);padding:8px 13px;border:1px solid var(--line);border-radius:99px;background:var(--panel-solid);color:var(--text);font-size:10px;opacity:0;pointer-events:none;transition:.2s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.empty{padding:18px;text-align:center;color:var(--soft);font-size:10px}
+@media(max-width:520px){.grid3{grid-template-columns:1fr}.sponsors{grid-template-columns:1fr}.num{font-size:56px;letter-spacing:8px}.lang-list{grid-template-columns:1fr}}
 </style>
 </head>
-
 <body>
-
 <div class="bg" aria-hidden="true">
-  <i style="left:5%;animation-duration:13s"></i>
-  <i style="left:12%;animation-duration:18s;animation-delay:-5s"></i>
-  <i style="left:19%;animation-duration:16s;animation-delay:-8s"></i>
-  <i style="left:27%;animation-duration:21s;animation-delay:-3s"></i>
-  <i style="left:35%;animation-duration:14s;animation-delay:-10s"></i>
-  <i style="left:44%;animation-duration:20s;animation-delay:-6s"></i>
-  <i style="left:53%;animation-duration:17s;animation-delay:-12s"></i>
-  <i style="left:61%;animation-duration:23s;animation-delay:-4s"></i>
-  <i style="left:70%;animation-duration:15s;animation-delay:-9s"></i>
-  <i style="left:78%;animation-duration:19s;animation-delay:-7s"></i>
-  <i style="left:87%;animation-duration:22s;animation-delay:-11s"></i>
-  <i style="left:94%;animation-duration:16s;animation-delay:-2s"></i>
+<i style="left:5%;animation-duration:13s"></i><i style="left:12%;animation-duration:18s;animation-delay:-5s"></i><i style="left:19%;animation-duration:16s;animation-delay:-8s"></i><i style="left:27%;animation-duration:21s;animation-delay:-3s"></i><i style="left:35%;animation-duration:14s;animation-delay:-10s"></i><i style="left:44%;animation-duration:20s;animation-delay:-6s"></i><i style="left:53%;animation-duration:17s;animation-delay:-12s"></i><i style="left:61%;animation-duration:23s;animation-delay:-4s"></i><i style="left:70%;animation-duration:15s;animation-delay:-9s"></i><i style="left:78%;animation-duration:19s;animation-delay:-7s"></i><i style="left:87%;animation-duration:22s;animation-delay:-11s"></i><i style="left:94%;animation-duration:16s;animation-delay:-2s"></i>
 </div>
-
 <div class="app">
-
 <header class="topbar">
-  <div class="brand">
-    <div class="logo">HW</div>
-    <div>
-      <strong>hashwager.win</strong>
-      <span>PUBLIC DRAW · VERIFIABLE</span>
-    </div>
-  </div>
-
-  <div class="tools">
-    <button class="tool" data-sheet="language">EN</button>
-    <button class="tool" data-sheet="theme">◐</button>
-    <button class="tool" id="openMine">•••</button>
-  </div>
+<div class="brand">
+<div class="logo">HW</div>
+<div>
+<strong>hashwager.win</strong>
+<span data-i18n="brandSub">PUBLIC DRAW · VERIFIABLE</span>
+</div>
+</div>
+<div class="tools">
+<button class="tool" id="langBtn" aria-label="Language">EN</button>
+<button class="tool" id="themeBtn" aria-label="Theme">◐</button>
+<button class="tool" id="openMine" aria-label="Menu">•••</button>
+</div>
 </header>
-
 <main>
-
 <section class="view on" id="view-home">
-
-  <div class="hero">
-
-    <div class="eyebrow">
-      <span class="dot"></span>
-      <span id="liveText">LIVE DRAW</span>
-    </div>
-
-    <h1 id="heroTitle">HashWager Public Draw</h1>
-
-    <div class="sub" id="heroSub">
-      Transparent result generation using public blockchain data
-    </div>
-
-    <div class="chips">
-      <span class="chip">SHA-256</span>
-      <span class="chip">ETH</span>
-      <span class="chip">TRON</span>
-      <span class="chip">TON</span>
-    </div>
-
-    <div class="round">
-      <div>
-        <small id="roundLabel">ROUND</small>
-        <b id="roundNumber">----</b>
-      </div>
-
-      <div class="cd">
-        <small id="countdownLabel">NEXT DRAW</small>
-        <strong id="countdown">00:00</strong>
-      </div>
-    </div>
-
-    <div class="bar">
-      <i id="progress"></i>
-    </div>
-
-    <div class="result">
-
-      <em id="resultLabel">CURRENT RESULT</em>
-
-      <div class="cell" id="resultCell">
-        <div class="num wait" id="resultNumber">---</div>
-      </div>
-
-      <div class="status" id="resultStatus">Waiting...</div>
-
-      <div class="traits">
-        <div class="trait">
-          <span id="sumLabel">SUM</span>
-          <b id="traitSum">-</b>
-        </div>
-        <div class="trait">
-          <span id="sizeLabel">SIZE</span>
-          <b id="traitSize">-</b>
-        </div>
-        <div class="trait">
-          <span id="parityLabel">PARITY</span>
-          <b id="traitParity">-</b>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="home-note" id="homeNote">
-      Every round is independently calculated from public blockchain data.
-    </div>
-
-  </div>
-
-  <div class="section">
-    <div class="head">
-      <span id="homeSourceTitle">BLOCKCHAIN SOURCES</span>
-      <span id="sourceState">LIVE</span>
-    </div>
-
-    <div class="grid3">
-
-      <div class="chain">
-        <b>Ethereum</b>
-        <small id="ethState">Waiting...</small>
-        <div class="hash copy" id="ethHash" onclick="copyValue(this)">----</div>
-      </div>
-
-      <div class="chain">
-        <b>TRON</b>
-        <small id="tronState">Waiting...</small>
-        <div class="hash copy" id="tronHash" onclick="copyValue(this)">----</div>
-      </div>
-
-      <div class="chain">
-        <b>TON</b>
-        <small id="tonState">Waiting...</small>
-        <div class="hash copy" id="tonHash" onclick="copyValue(this)">----</div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="head">
-      <span id="homeHistoryTitle">RECENT RESULTS</span>
-    </div>
-
-    <div class="card history" id="historyList">
-      <div class="empty" id="historyEmpty">No local history.</div>
-    </div>
-  </div>
-
+<div class="hero">
+<div class="eyebrow"><span class="dot"></span><span data-i18n="live">LIVE DRAW</span></div>
+<h1 data-i18n="title">HashWager Public Draw</h1>
+<div class="sub" data-i18n="sub">Transparent result generation using public blockchain data</div>
+<div class="chips">
+<span class="chip">SHA-256</span><span class="chip">ETH</span><span class="chip">TRON</span><span class="chip">TON</span>
+</div>
+<div class="round">
+<div>
+<small data-i18n="round">ROUND</small>
+<b id="roundNumber">----</b>
+</div>
+<div class="cd">
+<small data-i18n="next">NEXT DRAW</small>
+<strong id="countdown">00:00</strong>
+</div>
+</div>
+<div class="bar"><i id="progress"></i></div>
+<div class="result">
+<em data-i18n="current">CURRENT RESULT</em>
+<div class="cell" id="resultCell"><div class="num wait" id="resultNumber">---</div></div>
+<div class="status" id="resultStatus" data-state="wait">Waiting...</div>
+<div class="traits">
+<div class="trait"><span data-i18n="sum">SUM</span><b id="traitSum">-</b></div>
+<div class="trait"><span data-i18n="size">SIZE</span><b id="traitSize">-</b></div>
+<div class="trait"><span data-i18n="parity">PARITY</span><b id="traitParity">-</b></div>
+</div>
+</div>
+<div class="home-note" data-i18n="homeNote">Every round is independently calculated from public blockchain data.</div>
+</div>
+<div class="section">
+<div class="head"><span data-i18n="blockchain">BLOCKCHAIN SOURCES</span><span id="sourceState">LIVE</span></div>
+<div class="grid3">
+<div class="chain"><b>Ethereum</b><small id="ethState" data-state="wait">Waiting...</small><div class="hash copy" id="ethHash" onclick="copyValue(this)">----</div></div>
+<div class="chain"><b>TRON</b><small id="tronState" data-state="wait">Waiting...</small><div class="hash copy" id="tronHash" onclick="copyValue(this)">----</div></div>
+<div class="chain"><b>TON</b><small id="tonState" data-state="wait">Waiting...</small><div class="hash copy" id="tonHash" onclick="copyValue(this)">----</div></div>
+</div>
+</div>
+<div class="section">
+<div class="head"><span data-i18n="recent">RECENT RESULTS</span></div>
+<div class="card history" id="historyList"><div class="empty" id="historyEmpty">No local history.</div></div>
+</div>
 </section>
-
-
 <section class="view" id="view-draw">
-
-  <div class="section" style="margin-top:4px">
-
-    <div class="head">
-      <span id="drawTitle">DRAW VERIFICATION</span>
-      <span id="roundId">----</span>
-    </div>
-
-    <div class="card">
-
-      <div class="row">
-        <span id="drawRoundLabel">Round</span>
-        <div id="roundTime">----</div>
-      </div>
-
-      <div class="row">
-        <span id="originalLabel">Original Data</span>
-        <div class="copy" id="originalData" onclick="copyValue(this)">----</div>
-      </div>
-
-      <div class="row">
-        <span>SHA-256</span>
-        <div class="copy" id="shaHash" onclick="copyValue(this)">----</div>
-      </div>
-
-      <div class="row">
-        <span id="sourceHashLabel">Source Hash</span>
-        <div class="copy" id="sourceHash" onclick="copyValue(this)">----</div>
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="section">
-
-    <div class="head">
-      <span id="formulaTitle">CALCULATION</span>
-    </div>
-
-    <div class="card formula">
-
-      <p>
-        <span id="formulaSource">Seed</span>
-        <code>HW|ROUND|ETH|TRON|TON</code>
-      </p>
-
-      <p>
-        <span id="formulaHash">Hash</span>
-        <code>SHA-256</code>
-      </p>
-
-      <p>
-        <span id="formulaResult">Result</span>
-        <code>000–999</code>
-      </p>
-
-      <p>
-        <span id="formulaMethod">Method</span>
-        <code>Rejection Sampling</code>
-      </p>
-
-    </div>
-
-    <div class="verify">
-
-      <strong id="verifyTitle">Verify this result</strong>
-
-      <p id="verifyText">
-        Recalculate the SHA-256 hash and result locally to confirm the displayed result.
-      </p>
-
-      <button class="btn" onclick="verifyResult()" id="verifyButton">
-        VERIFY RESULT
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <div class="section">
-
-    <div class="head">
-      <span id="drawSourcesTitle">PUBLIC BLOCK SOURCES</span>
-    </div>
-
-    <div class="card">
-
-      <div class="row">
-        <span>Ethereum</span>
-        <div class="copy" id="drawEthHash" onclick="copyValue(this)">----</div>
-      </div>
-
-      <div class="row">
-        <span>TRON</span>
-        <div class="copy" id="drawTronHash" onclick="copyValue(this)">----</div>
-      </div>
-
-      <div class="row">
-        <span>TON</span>
-        <div class="copy" id="drawTonHash" onclick="copyValue(this)">----</div>
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="section">
-
-    <div class="head">
-      <span id="sponsorTitle">SPONSORS</span>
-      <span id="sponsorSource">INLINE</span>
-    </div>
-
-    <div class="sponsors" id="sponsorList"></div>
-
-    <div class="feed" id="sponsorFeedNote">
-      Source inline
-    </div>
-
-  </div>
-
+<div class="section" style="margin-top:4px">
+<div class="head"><span data-i18n="draw">DRAW VERIFICATION</span><span id="roundId">----</span></div>
+<div class="card">
+<div class="row"><span data-i18n="roundTime">Round</span><div id="roundTime">----</div></div>
+<div class="row"><span data-i18n="original">Original Data</span><div class="copy" id="originalData" onclick="copyValue(this)">----</div></div>
+<div class="row"><span>SHA-256</span><div class="copy" id="shaHash" onclick="copyValue(this)">----</div></div>
+<div class="row"><span data-i18n="sourceHash">Source Hash</span><div class="copy" id="sourceHash" onclick="copyValue(this)">----</div></div>
+</div>
+</div>
+<div class="section">
+<div class="head"><span data-i18n="calculation">CALCULATION</span></div>
+<div class="card formula">
+<p><span data-i18n="fSource">Seed</span><code>HW|ROUND|ETH|TRON|TON</code></p>
+<p><span data-i18n="fHash">Hash</span><code>SHA-256</code></p>
+<p><span data-i18n="fResult">Result</span><code>000–999</code></p>
+<p><span data-i18n="fMethod">Method</span><code>Rejection Sampling</code></p>
+</24div>
+<div class="verify">
+<strong data-i18n="verify">Verify this result</strong>
+<p data-i18n="verifyText">Recalculate the SHA-256 hash and result locally to confirm the displayed result.</p>
+<button class="btn" onclick="verifyResult()" data-i18n="verifyButton">VERIFY RESULT</button>
+</div>
+</div>
+<div class="section">
+<div class="head"><span data-i18n="drawSources">PUBLIC BLOCK SOURCES</span></div>
+<div class="card">
+<div class="row"><span>Ethereum</span><div class="copy" id="drawEthHash" onclick="copyValue(this)">----</div></div>
+<div class="row"><span>TRON</span><div class="copy" id="drawTronHash" onclick="copyValue(this)">----</div></div>
+<div class="row"><span>TON</span><div class="copy" id="drawTonHash" onclick="copyValue(this)">----</div></div>
+</div>
+</div>
+<div class="section">
+<div class="head"><span data-i18n="sponsors">SPONSORS</span><span id="sponsorSource">INLINE</span></div>
+<div class="sponsors" id="sponsorList"></div>
+<div class="feed" id="sponsorFeedNote" data-i18n="sponsorFeed">Source inline</div>
+</div>
 </section>
-
-
 <section class="view" id="view-mine">
-
-  <div class="section" style="margin-top:4px">
-
-    <div class="hero">
-
-      <div class="eyebrow">
-        <span id="mineEyebrow">ACCOUNT</span>
-      </div>
-
-      <h1 id="mineTitle">My Panel</h1>
-
-      <div class="sub" id="mineSub">
-        Account functions will be available here.
-      </div>
-
-      <div class="side-links">
-
-        <a href="#" onclick="return false">
-          <span id="mineBets">My Bets</span>
-        </a>
-
-        <a href="#" onclick="return false">
-          <span id="mineRecords">Records</span>
-        </a>
-
-        <a href="#" onclick="return false">
-          <span id="mineWallet">Wallet</span>
-        </a>
-
-        <a href="#" onclick="return false">
-          <span id="mineBonus">Bonus</span>
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
+<div class="section" style="margin-top:4px">
+<div class="hero">
+<div class="eyebrow"><span data-i18n="account">ACCOUNT</span></div>
+<h1 data-i18n="panel">My Panel</h1>
+<div class="sub" data-i18 n="panelSub">Account functions24 will be available here.</div>
+"<div class="side-links">
+ fill<a href="#" onclick="return false"><span=" data-i18n="bets">My Bets</span></a>
+<a href="#" onclick="return false"><span data-i18n="records">Records</span></a>
+<a href="#" onclick="return false"><span data-i18n="wallet">Wallet</span></a>
+<a href="#" onclick="return false"><span data-i18n="bonus">Bonus</span></a>
+</div>
+</div>
+</div>
 </section>
-
 </main>
-
-
 <footer class="footer">
-
-  <div>
-    <a href="https://x.com/hashwager" target="_blank" rel="noopener noreferrer">X</a>
-    ·
-    <a href="https://t.me/betsgamebot" target="_blank" rel="noopener noreferrer">Telegram</a>
-    ·
-    <a href="mailto:fisc@tuta.io">Email</a>
-    ·
-    <a href="https://t.me/Corp_supportbot" target="_blank" rel="noopener noreferrer">Support</a>
-  </div>
-
-  <div id="footerText">
-    hashwager.win · Public blockchain verification
-  </div>
-
+<div>
+<a href="https://x.com/hashwager" target="_blank" rel="noopener noreferrer">X</a> ·
+<a href="https://t.me/betsgamebot" target="_blank" rel="noopener noreferrer">Telegram</a> ·
+<a href="mailto:fisc@tuta.io">Email</a> ·
+<a href="https://t.me/Corp_supportbot" target="_blank" rel="noopener noreferrer">Support</a>
+</div>
+<div id="footerText" data-i18n="footerText">hashwager.win · Public blockchain verification</div>
 </footer>
-
 </div>
-
-
 <nav class="nav">
-
-  <button class="on" data-tab="home" id="tabHome">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-      <path d="M3 11.5 12 4l9 7.5"/>
-      <path d="M5 10.5V20h14v-9.5"/>
-      <path d="M9 20v-6h6v6"/>
-    </svg>
-    <span id="navHome">Home</span>
-  </button>
-
-  <button data-tab="draw" id="tabDraw">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-      <rect x="4" y="4" width="16" height="16" rx="3"/>
-      <path d="M8 9h8M8 13h8M8 17h5"/>
-    </svg>
-    <span id="navDraw">Draw</span>
-  </button>
-
-  <button data-tab="mine" id="tabMine">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-      <circle cx="12" cy="8" r="3.5"/>
-      <path d="M5 20c.7-3.4 3-5.5 7-5.5s6.3 2.1 7 5.5"/>
-    </svg>
-    <span id="navMine">Mine</span>
-  </button>
-
+<button class="on" data-tab="home" id="tabHome">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20h14v-9.5"/><path d="M9 20v-6h6v6"/></svg>
+<span data-i18n="navHome">Home</span>
+</button>
+<button data-tab="draw" id="tabDraw">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+<span data-i18n="navDraw">Draw</span>
+</button>
+<button data-tab="mine" id="tabMine">
+<svg viewBox="0 0 none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.7-3.4 3-5.5 7-5.5s6.3 2.1 7 5.5"/></svg>
+<span data-i18n="navMine">Mine</span>
+</button>
 </nav>
-
-
 <div class="mask" id="mask"></div>
-
-
 <aside class="side" id="side">
-
-  <button class="close" onclick="openSide(false)">×</button>
-
-  <h2 id="sideTitle">My Panel</h2>
-
-  <p id="sideSub">
-    Personal functions and project information.
-  </p>
-
-  <div class="side-links">
-
-    <a href="#" onclick="return false">
-      <span id="sideBets">My Bets</span>
-    </a>
-
-    <a href="#" onclick="return false">
-      <span id="sideRecords">Records</span>
-    </a>
-
-    <a href="#" onclick="return false">
-      <span id="sideWallet">Wallet</span>
-    </a>
-
-    <a href="#" onclick="return false">
-      <span id="sideBonus">Bonus</span>
-    </a>
-
-  </div>
-
+<button class="close" onclick="openSide(false)" aria-label="Close">×</button>
+<h2 data-i18n="panel">My Panel</h2>
+<p data-i18n="panelSub">Personal functions and project information.</p>
+<div class="side-links">
+<a href="#" onclick="return false"><span data-i18n="bets">My Bets</span></a>
+<a href="#" onclick="return false"><span data-i18n="records">Records</span></a>
+<a href="#" onclick="return false"><span data-i18n="wallet">Wallet</span></a>
+<a href="#" onclick="return false"><span data-i18n="bonus">Bonus</span></a>
+</div>
 </aside>
-
-
 <div class="sheet" id="sheet">
-
-  <div class="sheet-head">
-
-    <strong id="sheetTitle">Settings</strong>
-
-    <button id="sheetClose">×</button>
-
-  </div>
-
-  <div class="sheet-body" id="sheetBody">
-    Settings
-  </div>
-
+<div class="sheet-head">
+<strong id="sheetTitle">Settings</strong>
+<button id="sheetClose" aria-label="Close">×</button>
 </div>
-
-
-<div class="toast" id="toast">
-  Copied
+<div class="sheet-body" id="sheetBody">Settings</div>
 </div>
-
-
+<div class="toast" id="toast">Copied</div>
 <script>
-
 (async()=>{
-
 /* =========================================================
    CONFIG
 ========================================================= */
-
 const ROUND_SECONDS=210;
-
-const LANG={
-  zh:{
-    live:"实时开奖",
-    title:"HashWager 公开奖池",
-    sub:"使用公开区块链数据生成可验证结果",
-    round:"轮次",
-    next:"下期开奖",
-    current:"当前结果",
-    waiting:"等待数据…",
-    ready:"结果已生成",
-    error:"数据获取失败",
-    sum:"和值",
-    size:"大小",
-    parity:"单双",
-    blockchain:"区块链数据源",
-    recent:"最近结果",
-    historyEmpty:"暂无本地记录",
-    draw:"开奖验证",
-    original:"原始数据",
-    sourceHash:"来源哈希",
-    calculation:"计算过程",
-    verify:"验证结果",
-    verifyText:"重新计算 SHA-256 与开奖结果，确认当前结果。",
-    verifyButton:"验证结果",
-    pass:"验证通过",
-    fail:"验证失败",
-    none:"当前没有可验证结果",
-    sponsors:"赞助商",
-    account:"账户",
-    panel:"我的面板",
-    panelSub:"账户功能将在这里提供。",
-    bets:"我的投注",
-    records:"开奖记录",
-    wallet:"钱包",
-    bonus:"奖励",
-    source:"来源",
-    sheet:"设置",
-    sheetBody:"主题、语言及其他页面设置。",
-    copied:"已复制",
-    fetched:"已获取"
-  },
-
-  en:{
-    live:"LIVE DRAW",
-    title:"HashWager Public Draw",
-    sub:"Transparent result generation using public blockchain data",
-    round:"ROUND",
-    next:"NEXT DRAW",
-    current:"CURRENT RESULT",
-    waiting:"Waiting...",
-    ready:"Result ready",
-    error:"Data fetch failed",
-    sum:"SUM",
-    size:"SIZE",
-    parity:"PARITY",
-    blockchain:"BLOCKCHAIN SOURCES",
-    recent:"RECENT RESULTS",
-    historyEmpty:"No local history.",
-    draw:"DRAW VERIFICATION",
-    original:"Original Data",
-    sourceHash:"Source Hash",
-    calculation:"CALCULATION",
-    verify:"Verify this result",
-    verifyText:"Recalculate SHA-256 and the result locally to verify the displayed result.",
-    verifyButton:"VERIFY RESULT",
-    pass:"Verification passed",
-    fail:"Verification failed",
-    none:"No result available to verify",
-    sponsors:"SPONSORS",
-    account:"ACCOUNT",
-    panel:"My Panel",
-    panelSub:"Account functions will be available here.",
-    bets:"My Bets",
-    records:"Records",
-    wallet:"Wallet",
-    bonus:"Bonus",
-    source:"Source",
-    sheet:"Settings",
-    sheetBody:"Theme, language and other page settings.",
-    copied:"Copied",
-    fetched:"Fetched"
-  }
-};
-
-
+const HISTORY_KEY="hw_history";
+const RESULT_KEY_PREFIX="hw_result_";
+const HISTORY_MAX=20;
+const THEMES=["midnight","dark","light","aurora"];
+const RTL_BASES=["ar","fa","he","ur","yi"];
+/* =========================================================
+   LANGUAGES — 23 locales
+   下一轮填入 LANG 词典时，key 与此处的 code 一一对应
+========================================================= */
+const LANGUAGES=[
+{code:"en",    short:"EN", label:"English"},
+{code:"zh-CN", short:"简",  label:"简体中文"},
+{code:"zh-TW", short:"繁",  label:"繁體中文"},
+{code:"ja",    short:"日",  label:"日本語"},
+{code:"ko",    short:"한",  label:"한국어"},
+{code:"es",    short:"ES", label:"Español"},
+{code:"pt",    short:"PT", label:"Português"},
+{code:"fr",    short:"FR", label:"Français"},
+{code:"de",    short:"DE", label:"Deutsch"},
+{code:"it",    short:"IT", label:"Italiano"},
+{code:"ru",    short:"RU", label:"Русский"},
+{code:"ar",    short:"ع",  label:"العربية"},
+{code:"hi",    short:"हि",  label:"हिन्दी"},
+{code:"th",    short:"ท",  label:"ไทย"},
+{code:"vi",    short:"VI", label:"Tiếng Việt"},
+{code:"id",    short:"ID", label:"Bahasa Indonesia"},
+{code:"ms",    short:"MS", label:"Bahasa Melayu"},
+{code:"tr",    short:"TR", label:"Türkçe"},
+{code:"pl",    short:"PL", label:"Polski"},
+{code:"nl",    short:"NL", label:"Nederlands"},
+{code:"fa",    short:"فا",  label:"فارسی"},
+{code:"he",    short:"עב", label:"עברית"},
+{code:"uk",    short:"UK", label:"Українська"}
+];
+/* =========================================================
+   I18N DICTIONARY — 占位，下一轮填充 23 种语言
+   键名与 HTML 中 data-i18n 一致，例如：
+   LANG = {
+     "en":{ live:"LIVE DRAW", title:"HashWager Public Draw", ... },
+     "zh-CN":{ live:"实时开奖", title:"HashWager 公开奖池", ... },
+     ...
+   }
+========================================================= */
+const LANG={};
 /* =========================================================
    DRAW DATA
 ========================================================= */
-
 const DRAW={
-  sponsorFeeds:[],
-  sponsorsFeed:"",
-  sponsors:[
-    {
-      name:"HashWager",
-      desc:"Public Draw",
-      mark:"HW",
-      a:"#e7c27a",
-      b:"#b8894a",
-      url:"https://hashwager.win"
-    }
-  ]
+sponsorFeeds:[],
+sponsorsFeed:"",
+sponsors:[{name:"HashWager",desc:"Public Draw",mark:"HW",a:"#e7c27a",b:"#b8894a",url:"https://hashwager.win"}]
 };
-
-
 /* =========================================================
    API ENDPOINTS
 ========================================================= */
-
 const API={
-
-  eth:[
-    {
-      url:"https://ethereum-rpc.publicnode.com",
-      type:"rpc"
-    },
-    {
-      url:"https://eth.llamarpc.com",
-      type:"rpc"
-    },
-    {
-      url:"https://rpc.ankr.com/eth",
-      type:"rpc"
-    },
-    {
-      url:"https://1rpc.io/eth",
-      type:"rpc"
-    },
-    {
-      url:"https://api.blockcypher.com/v1/eth/main",
-      type:"blockcypher"
-    }
-  ],
-
-  tron:[
-    {
-      url:"https://api.trongrid.io/wallet/getnowblock",
-      type:"trongrid"
-    },
-    {
-      url:"https://api.tronstack.io/wallet/getnowblock",
-      type:"tronstack"
-    }
-  ],
-
-  ton:[
-    {
-      url:"https://toncenter.com/api/v2/getMasterchainInfo",
-      type:"toncenter"
-    },
-    {
-      url:"https://toncenter.com/api/v3/masterchainInfo",
-      type:"toncenter"
-    },
-    {
-      url:"https://tonapi.io/v2/blockchain/masterchain-head",
-      type:"tonapi"
-    }
-  ]
-
+eth:[
+{url:"https://ethereum-rpc.publicnode.com",type:"rpc"},
+{url:"https://eth.llamarpc.com",type:"rpc"},
+{url:"https://1rpc.io/eth",type:"rpc"},
+{url:"https://rpc.flashbots.net",type:"rpc"},
+{url:"https://api.blockcypher.com/v1/eth/main",type:"blockcypher"}
+],
+tron:[
+{url:"https://api.trongrid.io/wallet/getnowblock",type:"trongrid"}
+],
+ton:[
+{url:"https://toncenter.com/api/v2/getMasterchainInfo",type:"toncenter"},
+{url:"https://tonapi.io/v2/blockchain/masterchain-head",type:"tonapi"}
+]
 };
-
-
 /* =========================================================
    STATE
 ========================================================= */
-
-let language="zh";
+let language="en";
 let resultData=null;
 let currentRound=null;
 let sponsors=DRAW.sponsors||[];
 let fetchToken=0;
-
-
+let fetchRetry={round:null,count:0};
+let currentSponsorSource="inline";
 /* =========================================================
-   HELPERS
+   I18N HELPERS
 ========================================================= */
-
-function T(){
-  return LANG[language]||LANG.en;
+function langMeta(code){
+return LANGUAGES.find(L=>L.code===code)||LANGUAGES[0];
 }
-
+function isRTL(code){
+return RTL_BASES.includes(String(code).split("-")[0].toLowerCase());
+}
+function t(key,fallback,vars){
+const dict=LANG[language]||LANG.en||{};
+let v=dict[key];
+if(typeof v!=="string"||!v)v=fallback;
+if(v&&vars){
+for(const k in vars){
+v=v.split("{"+k+"}").join(vars[k]);
+}
+}
+return v==null?"":v;
+}
 function setText(id,value){
-  const el=document.getElementById(id);
-  if(el) el.textContent=value;
+const el=document.getElementById(id);
+if(el)el.textContent=value;
 }
-
-function roundNo(){
-  return Math.floor(Date.now()/(ROUND_SECONDS*1000));
+function setState(id,state,text){
+const el=document.getElementById(id);
+if(!el)return;
+el.dataset.state=state;
+if(text!=null)el.textContent=text;
 }
-
-function roundStart(round){
-  return round*ROUND_SECONDS*1000;
-}
-
-function utc(ms){
-  return new Date(ms).toISOString().replace("T"," ").replace(".000Z"," UTC");
-}
-
-
-/* =========================================================
-   LANGUAGE
-========================================================= */
-
 function applyLanguage(){
-
-  const x=T();
-
-  setText("liveText",x.live);
-  setText("heroTitle",x.title);
-  setText("heroSub",x.sub);
-
-  setText("roundLabel",x.round);
-  setText("countdownLabel",x.next);
-  setText("resultLabel",x.current);
-
-  setText("sumLabel",x.sum);
-  setText("sizeLabel",x.size);
-  setText("parityLabel",x.parity);
-
-  setText("homeSourceTitle",x.blockchain);
-  setText("homeHistoryTitle",x.recent);
-  setText("historyEmpty",x.historyEmpty);
-
-  setText("drawTitle",x.draw);
-  setText("originalLabel",x.original);
-  setText("sourceHashLabel",x.sourceHash);
-  setText("formulaTitle",x.calculation);
-
-  setText("verifyTitle",x.verify);
-  setText("verifyText",x.verifyText);
-  setText("verifyButton",x.verifyButton);
-
-  setText("sponsorTitle",x.sponsors);
-
-  setText("mineEyebrow",x.account);
-  setText("mineTitle",x.panel);
-  setText("mineSub",x.panelSub);
-
-  setText("mineBets",x.bets);
-  setText("mineRecords",x.records);
-  setText("mineWallet",x.wallet);
-  setText("mineBonus",x.bonus);
-
-  setText("sideTitle",x.panel);
-  setText("sideSub",x.panelSub);
-  setText("sideBets",x.bets);
-  setText("sideRecords",x.records);
-  setText("sideWallet",x.wallet);
-  setText("sideBonus",x.bonus);
-
-  setText("navHome","Home");
-  setText("navDraw","Draw");
-  setText("navMine","Mine");
-
-  renderHistory();
-
-  if(resultData){
-    paintTraits(resultData.res);
-  }
-
+const dict=LANG[language]||LANG.en||{};
+document.documentElement.lang=language;
+document.documentElement.dir=isRTL(language)?"rtl":"ltr";
+document.querySelectorAll("[data-i18n]").forEach(el=>{
+if(!("i18nDefault" in el.dataset))el.dataset.i18nDefault=el.textContent;
+const v=dict[el.dataset.i18n];
+el.textContent=(typeof v==="string"&&v)?v:el.dataset.i18nDefault;
+});
+const meta=langMeta(language);
+const btn=document.getElementById("langBtn");
+if(btn)btn.textContent=meta.short;
+refreshDynamicText();
+renderHistory();
+renderSponsors(currentSponsorSource);
 }
-
-
+function refreshDynamicText(){
+["eth","tron","ton"].forEach(c=>{
+const el=document.getElementById(c+"State");
+if(!el)return;
+const s=el.dataset.state||"wait";
+if(s==="ok")el.textContent=t("fetched","Fetched");
+if(s==="wait")el.textContent=t("waiting","Waiting...");
+if(s==="err")el.textContent=t("error","Data fetch failed");
+});
+const st=document.getElementById("resultStatus");
+if(st){
+const s=st.dataset.state||"wait";
+if(s==="ok")st.textContent=t("ready","Result ready");
+if(s==="wait")st.textContent=t("waiting","Waiting...");
+if(s==="err")st.textContent=t("error","Data fetch failed");
+}
+const src=document.getElementById("sourceState");
+if(src){
+const s=src.dataset.state||"live";
+if(s==="live")src.textContent="LIVE";
+if(s==="ok")src.textContent=t("fetched","Fetched");
+if(s==="err")src.textContent=t("error","Data fetch failed");
+}
+if(resultData&&resultData.res)paintTraits(resultData.res);
+}
+/* =========================================================
+   ROUND / TIME
+========================================================= */
+function roundNo(){
+return Math.floor(Date.now()/(ROUND_SECONDS*1000));
+}
+function roundStart(round){
+return round*ROUND_SECONDS*1000;
+}
+function utc(ms){
+return new Date(ms).toISOString().replace("T"," ").replace(".000Z"," UTC");
+}
 /* =========================================================
    TRAITS
 ========================================================= */
-
 function traitsOf(res){
-
-  const n=Number(res);
-
-  return {
-    sum:String(
-      String(n)
-        .padStart(3,"0")
-        .split("")
-        .reduce((a,b)=>a+Number(b),0)
-    ),
-
-    size:n>=500?"big":"small",
-
-    parity:n%2===0?"even":"odd"
-  };
-
+const n=Number(res);
+return {
+sum:String(String(n).padStart(3,"0").split("").reduce((a,b)=>a+Number(b),0)),
+size:n>=500?"big":"small",
+parity:n%2===0?"even":"odd"
+};
 }
-
 function paintTraits(res){
-
-  const x=T();
-
-  if(!res){
-
-    setText("traitSum","-");
-    setText("traitSize","-");
-    setText("traitParity","-");
-
-    return;
-  }
-
-  const t=traitsOf(res);
-
-  setText("traitSum",t.sum);
-  setText("traitSize",x[t.size]||t.size);
-  setText("traitParity",x[t.parity]||t.parity);
-
+if(!res){
+setText("traitSum","-");
+setText("traitSize","-");
+setText("traitParity","-");
+return;
 }
-
-
+const tr=traitsOf(res);
+setText("traitSum",tr.sum);
+setText("traitSize",t(tr.size,tr.size));
+setText("traitParity",t(tr.parity,tr.parity));
+}
 /* =========================================================
    SHA-256
 ========================================================= */
-
+function hasSubtle(){
+return !!(window.crypto&&window.crypto.subtle&&window.TextEncoder);
+}
 async function sha256(input){
-
-  const data=new TextEncoder().encode(input);
-
-  const hash=await crypto.subtle.digest("SHA-256",data);
-
-  return Array.from(new Uint8Array(hash))
-    .map(b=>b.toString(16).padStart(2,"0"))
-    .join("");
-
+if(!hasSubtle())throw new Error("SHA-256 unavailable: requires secure context (HTTPS)");
+const data=new TextEncoder().encode(input);
+const hash=await crypto.subtle.digest("SHA-256",data);
+return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("");
 }
-
-
-/* =========================================================
-   FAIR 000-999
-========================================================= */
-
 async function fair3(seed){
-
-  const M=2n**256n;
-  const TT=1000n;
-  const rem=M%TT;
-
-  let hex=await sha256(seed);
-  let big=BigInt("0x"+hex);
-
-  while(big>=M-rem){
-
-    hex=await sha256(hex);
-    big=BigInt("0x"+hex);
-
-  }
-
-  return String(big%TT).padStart(3,"0");
-
+const M=2n**256n;
+const TT=1000n;
+const rem=M%TT;
+let hex=await sha256(seed);
+let big=BigInt("0x"+hex);
+while(big>=M-rem){
+hex=await sha256(hex);
+big=BigInt("0x"+hex);
 }
-
-
+return String(big%TT).padStart(3,"0");
+}
 /* =========================================================
-   ETH
+   CHAIN FETCH
 ========================================================= */
-
 async function fetchFromETH(ep,signal){
-
-  if(ep.type==="blockcypher"){
-
-    const r=await fetch(ep.url,{cache:"no-store",signal});
-
-    if(!r.ok) throw new Error("HTTP "+r.status);
-
-    const d=await r.json();
-
-    const hash=d.hash||d.block_hash;
-
-    if(!hash) throw new Error("no hash");
-
-    return String(hash).toLowerCase();
-
-  }
-
-  const r=await fetch(
-    ep.url,
-    {
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify({
-        jsonrpc:"2.0",
-        id:1,
-        method:"eth_getBlockByNumber",
-        params:["latest",false]
-      }),
-      cache:"no-store",
-      signal
-    }
-  );
-
-  if(!r.ok) throw new Error("HTTP "+r.status);
-
-  const d=await r.json();
-
-  const hash=d.result&&d.result.hash;
-
-  if(!hash) throw new Error("no block hash");
-
-  return String(hash).toLowerCase();
-
+if(ep.type==="blockcypher"){
+const r=await fetch(ep.url,{cache:"no-store",signal});
+if(!r.ok)throw new Error("HTTP "+r.status);
+const d=await r.json();
+const hash=d.hash||d.block_hash;
+if(!hash)throw new Error("no hash");
+return String(hash).toLowerCase();
 }
-
-
-/* =========================================================
-   TRON
-========================================================= */
-
+const r=await fetch(ep.url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"eth_getBlockByNumber",params:["latest",false]}),cache:"no-store",signal});
+if(!r.ok)throw new Error("HTTP "+r.status);
+const d=await r.json();
+const hash=d.result&&d.result.hash;
+if(!hash)throw new Error("no block hash");
+return String(hash).toLowerCase();
+}
 async function fetchFromTRON(ep,signal){
-
-  const r=await fetch(
-    ep.url,
-    {
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:"{}",
-      cache:"no-store",
-      signal
-    }
-  );
-
-  if(!r.ok) throw new Error("HTTP "+r.status);
-
-  const d=await r.json();
-
-  const hash=
-    d.blockID||
-    d.block_id||
-    d.hash;
-
-  if(!hash) throw new Error("no blockID");
-
-  return String(hash).toLowerCase();
-
+const r=await fetch(ep.url,{method:"POST",headers:{"Content-Type":"application/json"},body:"{}",cache:"no-store",signal});
+if(!r.ok)throw new Error("HTTP "+r.status);
+const d=await r.json();
+const hash=d.blockID||d.block_id||d.hash;
+if(!hash)throw new Error("no blockID");
+return String(hash).toLowerCase();
 }
-
-
-/* =========================================================
-   TON
-========================================================= */
-
 async function fetchFromTON(ep,signal){
-
-  const r=await fetch(
-    ep.url,
-    {
-      cache:"no-store",
-      signal
-    }
-  );
-
-  if(!r.ok) throw new Error("HTTP "+r.status);
-
-  const d=await r.json();
-
-  const c=[
-    d.last&&d.last.hash,
-    d.last&&d.last.root_hash,
-    d.last&&d.last.file_hash,
-    d.result&&d.result.last&&d.result.last.hash,
-    d.result&&d.result.last&&d.result.last.root_hash,
-    d.hash
-  ];
-
-  const hash=c.find(
-    v=>typeof v==="string"&&v
-  );
-
-  if(!hash) throw new Error("no hash");
-
-  return String(hash).toLowerCase();
-
+const r=await fetch(ep.url,{cache:"no-store",signal});
+if(!r.ok)throw new Error("HTTP "+r.status);
+const d=await r.json();
+const cands=[d.last&&d.last.hash,d.last&&d.last.root_hash,d.last&&d.last.file_hash,d.result&&d.result.last&&d.result.last.hash,d.result&&d.result.last&&d.result.last.root_hash,d.hash];
+const hash=cands.find(v=>typeof v==="string"&&v);
+if(!hash)throw new Error("no hash");
+return String(hash).toLowerCase();
 }
-
-
-/* =========================================================
-   MULTI ENDPOINT FAILOVER
-========================================================= */
-
 async function fetchBlockHash(chain){
-
-  const eps=API[chain]||[];
-  const errors=[];
-
-  for(const ep of eps){
-
-    const c=new AbortController();
-
-    const t=setTimeout(
-      ()=>c.abort(),
-      6500
-    );
-
-    try{
-
-      if(chain==="eth"){
-        return await fetchFromETH(ep,c.signal);
-      }
-
-      if(chain==="tron"){
-        return await fetchFromTRON(ep,c.signal);
-      }
-
-      if(chain==="ton"){
-        return await fetchFromTON(ep,c.signal);
-      }
-
-    }catch(e){
-
-      errors.push(ep.url);
-
-    }finally{
-
-      clearTimeout(t);
-
-    }
-
-  }
-
-  throw new Error(
-    chain+" failed: "+errors.join(" | ")
-  );
-
+const eps=API[chain]||[];
+const errors=[];
+for(const ep of eps){
+const c=new AbortController();
+const timer=setTimeout(()=>c.abort(),6500);
+try{
+if(chain==="eth")return await fetchFromETH(ep,c.signal);
+if(chain==="tron")return await fetchFromTRON(ep,c.signal);
+if(chain==="ton")return await fetchFromTON(ep,c.signal);
+}catch(e){
+errors.push(ep.url);
+}finally{
+clearTimeout(timer);
 }
-
-
+}
+throw new Error(chain+" failed: "+errors.join(" | "));
+}
 /* =========================================================
    HISTORY
 ========================================================= */
-
 function readHistory(){
-
-  try{
-    return JSON.parse(
-      localStorage.getItem("hw_history")||"[]"
-    );
-  }catch(e){
-    return [];
-  }
-
+try{return JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]");}
+catch(e){return [];}
 }
-
 function saveHistory(row){
-
-  const list=readHistory()
-    .filter(x=>x.round!==row.round);
-
-  list.unshift(row);
-
-  try{
-    localStorage.setItem(
-      "hw_history",
-      JSON.stringify(list.slice(0,10))
-    );
-  }catch(e){}
-
-  renderHistory();
-
+const list=readHistory().filter(x=>x.round!==row.round);
+list.unshift(row);
+const keep=list.slice(0,HISTORY_MAX);
+try{localStorage.setItem(HISTORY_KEY,JSON.stringify(keep));}catch(e){}
+const keepKeys=new Set(keep.map(x=>RESULT_KEY_PREFIX+x.round));
+const toRemove=[];
+for(let i=0;i<localStorage.length;i++){
+const k=localStorage.key(i);
+if(k&&k.indexOf(RESULT_KEY_PREFIX)===0&&!keepKeys.has(k))toRemove.push(k);
 }
-
+toRemove.forEach(k=>{try{localStorage.removeItem(k);}catch(e){}});
+renderHistory();
+}
 function renderHistory(){
-
-  const box=document.getElementById("historyList");
-
-  const list=readHistory().slice(0,10);
-
-  const x=T();
-
-  if(!list.length){
-
-    box.innerHTML=
-      '<div class="empty" id="historyEmpty">'+
-      x.historyEmpty+
-      "</div>";
-
-    return;
-  }
-
-  box.innerHTML=list.map(item=>{
-
-    const t=traitsOf(item.res);
-
-    return `
-      <div class="hitem">
-        <span>#${item.round}</span>
-        <strong>${item.res}</strong>
-        <div class="tags">
-          <span class="tag">${x.sum} ${t.sum}</span>
-          <span class="tag">${x[t.size]||t.size}</span>
-          <span class="tag">${x[t.parity]||t.parity}</span>
-        </div>
-      </div>
-    `;
-
-  }).join("");
-
+const box=document.getElementById("historyList");
+if(!box)return;
+const list=readHistory().slice(0,HISTORY_MAX);
+if(!list.length){
+box.innerHTML='<div class="empty" id="historyEmpty">'+esc(t("historyEmpty","No local history."))+'</div>';
+return;
 }
-
-
+box.innerHTML=list.map(item=>{
+const tr=traitsOf(item.res);
+return '<div class="hitem"><span>#'+esc(String(item.round))+'</span><strong>'+esc(String(item.res))+'</strong><div class="tags"><span class="tag">'+esc(t("sum","SUM"))+' '+esc(tr.sum)+'</span><span class="tag">'+esc(t(tr.size,tr.size))+'</span><span class="tag">'+esc(t(tr.parity,tr.parity))+'</span></div></div>';
+}).join("");
+}
 /* =========================================================
    TIMER
 ========================================================= */
-
 function tick(){
-
-  const now=Date.now();
-
-  const round=roundNo();
-
-  const start=roundStart(round);
-
-  const next=start+ROUND_SECONDS*1000;
-
-  const left=Math.max(
-    0,
-    next-now
-  );
-
-  const sec=Math.ceil(left/1000);
-
-  setText("roundNumber",round);
-  setText("roundId",round);
-  setText("roundTime",utc(start));
-
-  setText(
-    "countdown",
-    String(Math.floor(sec/60)).padStart(2,"0")+
-    ":"+
-    String(sec%60).padStart(2,"0")
-  );
-
-  document.getElementById("progress").style.width=
-    (left/(ROUND_SECONDS*1000)*100)+"%";
-
-  /*
-    这里只在真正进入新轮次时触发一次请求。
-    原代码在初始化时还额外调用了一次 fetchChains，
-    会造成重复请求。
-  */
-
-  if(currentRound!==round){
-
-    currentRound=round;
-
-    resultData=null;
-
-    resetUI();
-
-    fetchChains(round);
-
-  }
-
+const now=Date.now();
+const round=roundNo();
+const start=roundStart(round);
+const next=start+ROUND_SECONDS*1000;
+const left=Math.max(0,next-now);
+const sec=Math.ceil(left/1000);
+setText("roundNumber",round);
+setText("roundId",round);
+setText("roundTime",utc(start));
+setText("countdown",String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0"));
+const p=document.getElementById("progress");
+if(p)p.style.width=(left/(ROUND_SECONDS*1000)*100)+"%";
+if(currentRound!==round){
+currentRound=round;
+resultData=null;
+fetchRetry={round,count:0};
+resetUI();
+fetchChains(round);
 }
-
-
+}
 /* =========================================================
-   RESET
+   UI RESET
 ========================================================= */
-
 function resetUI(){
-
-  const n=document.getElementById("resultNumber");
-
-  const cell=document.getElementById("resultCell");
-
-  const st=document.getElementById("resultStatus");
-
-  n.textContent="---";
-
-  n.className="num wait";
-
-  cell.className="cell";
-
-  st.className="status";
-
-  st.textContent=T().waiting;
-
-  [
-    "ethHash",
-    "tronHash",
-    "tonHash",
-    "sourceHash",
-    "originalData",
-    "shaHash"
-  ].forEach(
-    id=>setText(id,"----")
-  );
-
-  [
-    "ethState",
-    "tronState",
-    "tonState"
-  ].forEach(id=>{
-
-    const el=document.getElementById(id);
-
-    el.dataset.ok="";
-
-    el.textContent=T().waiting;
-
-  });
-
-  paintTraits(null);
-
+const n=document.getElementById("resultNumber");
+const cell=document.getElementById("resultCell");
+const st=document.getElementById("resultStatus");
+if(n){n.textContent="---";n.className="num wait";}
+if(cell)cell.className="cell";
+if(st){st.className="status";st.dataset.state="wait";st.textContent=t("waiting","Waiting...");}
+["ethHash","tronHash","tonHash","sourceHash","originalData","shaHash","drawEthHash","drawTronHash","drawTonHash"].forEach(id=>setText(id,"----"));
+["eth","tron","ton"].forEach(c=>{
+const el=document.getElementById(c+"State");
+if(el){el.dataset.state="wait";el.textContent=t("waiting","Waiting...");}
+});
+const src=document.getElementById("sourceState");
+if(src){src.dataset.state="live";src.textContent="LIVE";}
+paintTraits(null);
 }
-
-
 /* =========================================================
    DRAW ANIMATION
 ========================================================= */
-
 function animateResult(finalValue){
-
-  return new Promise(resolve=>{
-
-    const cell=document.getElementById("resultCell");
-
-    const number=document.getElementById("resultNumber");
-
-    cell.classList.add("draw");
-
-    number.classList.remove("wait");
-
-    let frame=0;
-
-    const total=22;
-
-    const timer=setInterval(()=>{
-
-      let v=String(
-        Math.floor(Math.random()*1000)
-      ).padStart(3,"0");
-
-      if(frame>total*0.55){
-
-        const vis=Math.min(
-          3,
-          Math.floor(
-            (frame-total*0.55)/
-            (total*0.45)*
-            3
-          )
-        );
-
-        v=
-          finalValue.slice(0,vis)+
-          v.slice(vis);
-
-      }
-
-      number.textContent=v;
-
-      frame++;
-
-      if(frame>=total){
-
-        clearInterval(timer);
-
-        number.textContent=finalValue;
-
-        cell.classList.remove("draw");
-
-        cell.classList.add("final");
-
-        setTimeout(()=>{
-
-          cell.classList.remove("final");
-
-          resolve();
-
-        },650);
-
-      }
-
-    },45);
-
-  });
-
+return new Promise(resolve=>{
+const cell=document.getElementById("resultCell");
+const number=document.getElementById("resultNumber");
+if(!cell||!number){resolve();return;}
+cell.classList.add("draw");
+number.classList.remove("wait");
+let frame=0;
+const total=22;
+const timer=setInterval(()=>{
+let v=String(Math.floor(Math.random()*1000)).padStart(3,"0");
+if(frame>total*0.55){
+const vis=Math.min(3,Math.floor((frame-total*0.55)/(total*0.45)*3));
+v=finalValue.slice(0,vis)+v.slice(vis);
 }
-
-
+number.textContent=v;
+frame++;
+if(frame>=total){
+clearInterval(timer);
+number.textContent=finalValue;
+cell.classList.remove("draw");
+cell.classList.add("final");
+setTimeout(()=>{cell.classList.remove("final");resolve();},650);
+}
+},45);
+});
+}
 /* =========================================================
    FETCH CURRENT ROUND
 ========================================================= */
-
 async function fetchChains(round=roundNo()){
-
-  /*
-    每次请求产生一个 token。
-    如果旧轮次请求晚于新轮次完成，
-    就直接丢弃旧请求结果。
-  */
-
-  const token=++fetchToken;
-
-  const key="hw_result_"+round;
-
-  try{
-
-    const cached=JSON.parse(
-      localStorage.getItem(key)||"null"
-    );
-
-    if(
-      cached&&
-      cached.res&&
-      cached.res.length===3
-    ){
-
-      renderResult(
-        cached,
-        false
-      );
-
-      return;
-
-    }
-
-  }catch(e){}
-
-
-  try{
-
-    const [
-      eth,
-      tron,
-      ton
-    ]=await Promise.all([
-
-      fetchBlockHash("eth"),
-
-      fetchBlockHash("tron"),
-
-      fetchBlockHash("ton")
-
-    ]);
-
-
-    /*
-      防止旧请求覆盖新轮次。
-    */
-
-    if(
-      token!==fetchToken||
-      round!==currentRound
-    ){
-
-      return;
-
-    }
-
-
-    setText("ethHash",eth);
-
-    setText("tronHash",tron);
-
-    setText("tonHash",ton);
-
-
-    [
-      "ethState",
-      "tronState",
-      "tonState"
-    ].forEach(id=>{
-
-      const el=document.getElementById(id);
-
-      el.dataset.ok="1";
-
-      el.textContent=T().fetched;
-
-    });
-
-
-    const orig=[
-      "HW",
-      "ROUND",
-      round,
-      "ETH",
-      eth,
-      "TRON",
-      tron,
-      "TON",
-      ton
-    ].join("|");
-
-
-    const sha=await sha256(orig);
-
-    const res=await fair3(orig);
-
-
-    /*
-      hash 计算也是异步的，
-      因此再次确认当前请求没有过期。
-    */
-
-    if(
-      token!==fetchToken||
-      round!==currentRound
-    ){
-
-      return;
-
-    }
-
-
-    const data={
-
-      round,
-
-      eth,
-
-      tron,
-
-      ton,
-
-      orig,
-
-      sha,
-
-      res,
-
-      time:utc(roundStart(round))
-
-    };
-
-
-    try{
-
-      localStorage.setItem(
-        key,
-        JSON.stringify(data)
-      );
-
-    }catch(e){}
-
-
-    renderResult(
-      data,
-      true
-    );
-
-
-  }catch(err){
-
-    console.error(err);
-
-    /*
-      只有当前轮次的请求才能显示错误。
-    */
-
-    if(
-      token!==fetchToken||
-      round!==currentRound
-    ){
-
-      return;
-
-    }
-
-
-    document.getElementById(
-      "resultNumber"
-    ).textContent="---";
-
-
-    document.getElementById(
-      "resultNumber"
-    ).classList.remove("wait");
-
-
-    const st=document.getElementById(
-      "resultStatus"
-    );
-
-    st.className="status err";
-
-    st.textContent=T().error;
-
-
-    [
-      "ethState",
-      "tronState",
-      "tonState"
-    ].forEach(id=>{
-
-      document.getElementById(id).textContent=
-        T().error;
-
-    });
-
-  }
-
+const token=++fetchToken;
+const key=RESULT_KEY_PREFIX+round;
+if(!hasSubtle()){
+const st=document.getElementById("resultStatus");
+if(st){st.className="status err";st.dataset.state="err";st.textContent=t("cryptoError","SHA-256 requires a secure context (HTTPS)");}
+const src=document.getElementById("sourceState");
+if(src){src.dataset.state="err";src.textContent=t("error","Data fetch failed");}
+return;
 }
-
-
+try{
+const cached=JSON.parse(localStorage.getItem(key)||"null");
+if(cached&&cached.res&&cached.res.length===3){
+if(token!==fetchToken||round!==currentRound)return;
+await renderResult(cached,false,false);
+return;
+}
+}catch(e){}
+try{
+const [eth,tron,ton]=await Promise.all([fetchBlockHash("eth"),fetchBlockHash("tron"),fetchBlockHash("ton")]);
+if(token!==fetchToken||round!==currentRound)return;
+setText("ethHash",eth);
+setText("tronHash",tron);
+setText("tonHash",ton);
+["eth","tron","ton"].forEach(c=>{
+const el=document.getElementById(c+"State");
+if(el){el.dataset.state="ok";el.textContent=t("fetched","Fetched");}
+});
+const src=document.getElementById("sourceState");
+if(src){src.dataset.state="ok";src.textContent=t("fetched","Fetched");}
+const orig=["HW","ROUND",round,"ETH",eth,"TRON",tron,"TON",ton].join("|");
+const sha=await sha256(orig);
+const res=await fair3(orig);
+if(token!==fetchToken||round!==currentRound)return;
+const data={round,eth,tron,ton,orig,sha,res,time:utc(roundStart(round))};
+try{localStorage.setItem(key,JSON.stringify(data));}catch(e){}
+fetchRetry={round,count:0};
+await renderResult(data,true,true);
+}catch(err){
+console.error(err);
+if(token!==fetchToken||round!==currentRound)return;
+const number=document.getElementById("resultNumber");
+if(number){number.textContent="---";number.classList.remove("wait");}
+const st=document.getElementById("resultStatus");
+if(st){st.className="status err";st.dataset.state="err";st.textContent=t("error","Data fetch failed");}
+["eth","tron","ton"].forEach(c=>{
+const el=document.getElementById(c+"State");
+if(el){el.dataset.state="err";el.textContent=t("error","Data fetch failed");}
+});
+const src=document.getElementById("sourceState");
+if(src){src.dataset.state="err";src.textContent=t("error","Data fetch failed");}
+if(fetchRetry.round!==round)fetchRetry={round,count:0};
+if(fetchRetry.count<3){
+fetchRetry.count++;
+setTimeout(()=>{
+if(token===fetchToken&&round===currentRound)fetchChains(round);
+},15000);
+}
+}
+}
 /* =========================================================
    RENDER RESULT
 ========================================================= */
-
-async function renderResult(data,animate){
-
-  resultData=data;
-
-  setText("ethHash",data.eth);
-
-  setText("tronHash",data.tron);
-
-  setText("tonHash",data.ton);
-
-  setText("drawEthHash",data.eth);
-
-  setText("drawTronHash",data.tron);
-
-  setText("drawTonHash",data.ton);
-
-  setText("originalData",data.orig);
-
-  setText("shaHash",data.sha);
-
-  setText("sourceHash",data.sha);
-
-
-  [
-    "ethState",
-    "tronState",
-    "tonState"
-  ].forEach(id=>{
-
-    const el=document.getElementById(id);
-
-    el.dataset.ok="1";
-
-    el.textContent=T().fetched;
-
-  });
-
-
-  const number=document.getElementById(
-    "resultNumber"
-  );
-
-  const st=document.getElementById(
-    "resultStatus"
-  );
-
-
-  number.classList.remove("wait");
-
-
-  if(animate){
-
-    await animateResult(data.res);
-
-  }else{
-
-    number.textContent=data.res;
-
-  }
-
-
-  st.className="status ok";
-
-  st.textContent=T().ready;
-
-
-  paintTraits(data.res);
-
-
-  saveHistory({
-
-    round:data.round,
-
-    res:data.res,
-
-    time:data.time
-
-  });
-
+async function renderResult(data,animate,persist){
+resultData=data;
+setText("ethHash",data.eth);
+setText("tronHash",data.tron);
+setText("tonHash",data.ton);
+setText("drawEthHash",data.eth);
+setText("drawTronHash",data.tron);
+setText("drawTonHash",data.ton);
+setText("originalData",data.orig);
+setText("shaHash",data.sha);
+setText("sourceHash",data.sha);
+["eth","tron","ton"].forEach(c=>{
+const el=document.getElementById(c+"State");
+if(el){el.dataset.state="ok";el.textContent=t("fetched","Fetched");}
+});
+const src=document.getElementById("sourceState");
+if(src){src.dataset.state="ok";src.textContent=t("fetched","Fetched");}
+const number=document.getElementById("resultNumber");
+const st=document.getElementById("resultStatus");
+if(number)number.classList.remove("wait");
+if(animate)await animateResult(data.res);
+else if(number)number.textContent=data.res;
+if(st){st.className="status ok";st.dataset.state="ok";st.textContent=t("ready","Result ready");}
+paintTraits(data.res);
+const already=readHistory().some(x=>x.round===data.round);
+if(persist||!already)saveHistory({round:data.round,res:data.res,time:data.time});
 }
-
-
 /* =========================================================
    COPY
 ========================================================= */
-
 function copyTextFallback(text){
-
-  const ta=document.createElement("textarea");
-
-  ta.value=text;
-
-  ta.style.position="fixed";
-
-  ta.style.left="-999px";
-
-  document.body.appendChild(ta);
-
-  ta.select();
-
-  document.execCommand("copy");
-
-  document.body.removeChild(ta);
-
+const ta=document.createElement("textarea");
+ta.value=text;
+ta.style.position="fixed";
+ta.style.left="-999px";
+document.body.appendChild(ta);
+ta.select();
+try{document.execCommand("copy");}catch(e){}
+document.body.removeChild(ta);
 }
-
-function showToast(){
-
-  const t=document.getElementById("toast");
-
-  t.textContent=T().copied;
-
-  t.classList.add("on");
-
-  setTimeout(
-    ()=>t.classList.remove("on"),
-    1100
-  );
-
+function showToast(msg){
+const el=document.getElementById("toast");
+if(!el)return;
+el.textContent=msg||t("copied","Copied");
+el.classList.add("on");
+setTimeout(()=>el.classList.remove("on"),1100);
 }
-
 window.copyValue=function(el){
-
-  const v=el.textContent.trim();
-
-  if(!v||v==="----") return;
-
-  if(
-    navigator.clipboard&&
-    window.isSecureContext
-  ){
-
-    navigator.clipboard
-      .writeText(v)
-      .then(showToast)
-      .catch(()=>{
-        copyTextFallback(v);
-        showToast();
-      });
-
-  }else{
-
-    copyTextFallback(v);
-
-    showToast();
-
-  }
-
-};
-
-
-/* =========================================================
-   VERIFY
-========================================================= */
-
-window.verifyResult=async function(){
-
-  if(!resultData){
-
-    alert(T().none);
-
-    return;
-
-  }
-
-  const hash=await sha256(
-    resultData.orig
-  );
-
-  const res=await fair3(
-    resultData.orig
-  );
-
-  alert(
-    hash===resultData.sha&&
-    res===resultData.res
-      ?T().pass+"\n"+res
-      :T().fail
-  );
-
-};
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-/*
-  原代码这里存在一个致命语法错误：
-
-  \"":"" 
-
-  会导致整个 <script> 无法解析。
-
-  修正后的 HTML escape 映射：
-*/
-
-function esc(s){
-
-  return String(s??"").replace(
-    /[&<>"']/g,
-    c=>({
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      "\"":"&quot;",
-      "'":"&#39;"
-    }[c])
-  );
-
+const v=el.textContent.trim();
+if(!v||v==="----")return;
+if(navigator.clipboard&&window.isSecureContext){
+navigator.clipboard.writeText(v).then(()=>showToast()).catch(()=>{copyTextFallback(v);showToast();});
+}else{
+copyTextFallback(v);
+showToast();
 }
-
-
-/* =========================================================
-   SPONSORS
-========================================================= */
-
-function renderSponsors(source){
-
-  const box=document.getElementById(
-    "sponsorList"
-  );
-
-  box.innerHTML="";
-
-
-  sponsors.forEach(s=>{
-
-    const a=document.createElement("a");
-
-    a.className="sponsor sp";
-
-    a.href=s.url||"#";
-
-
-    if(
-      s.url&&
-      s.url!=="#"
-    ){
-
-      a.target="_blank";
-
-      a.rel="noopener noreferrer";
-
-    }
-
-
-    a.style.setProperty(
-      "--a",
-      s.a||"#e7c27a"
-    );
-
-    a.style.setProperty(
-      "--b",
-      s.b||"#b8894a"
-    );
-
-
-    a.innerHTML=
-      '<div class="mark">'+
-      esc(s.mark||s.name.slice(0,2))+
-      '</div>'+
-      '<div>'+
-      '<strong>'+
-      esc(s.name)+
-      '</strong>'+
-      '<span>'+
-      esc(s.desc||"")+
-      '</span>'+
-      '</div>';
-
-
-    box.appendChild(a);
-
-  });
-
-
-  setText(
-    "sponsorSource",
-    source||"INLINE"
-  );
-
-
-  setText(
-    "sponsorFeedNote",
-    language==="zh"
-      ?"来源 "+(source||"内置")+" · 上传 sponsors.json 后会被公开爬取"
-      :"Source "+(source||"inline")+" · upload sponsors.json to be crawled"
-  );
-
-}
-
-
-async function crawlSponsors(){
-
-  const feeds=[]
-
-  .concat(
-    DRAW.sponsorFeeds||[],
-    DRAW.sponsorsFeed||[]
-  )
-
-  .filter(Boolean);
-
-
-  for(const url of feeds){
-
-    try{
-
-      const r=await fetch(
-        url,
-        {
-          cache:"no-store"
-        }
-      );
-
-      if(!r.ok) continue;
-
-
-      const data=await r.json();
-
-
-      const list=
-        Array.isArray(data)
-          ?data
-          :(data.sponsors||data.items||[]);
-
-
-      if(list.length){
-
-        sponsors=list;
-
-        renderSponsors(url);
-
-        return;
-
-      }
-
-    }catch(e){}
-
-  }
-
-
-  renderSponsors("inline");
-
-}
-
-
-/* =========================================================
-   SIDE PANEL
-========================================================= */
-
-function openSide(on){
-
-  document
-    .getElementById("side")
-    .classList.toggle("on",on);
-
-  document
-    .getElementById("mask")
-    .classList.toggle("on",on);
-
-
-  if(!on){
-
-    document
-      .getElementById("sheet")
-      .classList.remove("on");
-
-  }
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-document
-  .querySelectorAll(".nav button[data-tab]")
-  .forEach(b=>{
-
-    b.onclick=()=>{
-
-      document
-        .querySelectorAll(".nav button")
-        .forEach(x=>
-          x.classList.remove("on")
-        );
-
-
-      b.classList.add("on");
-
-
-      document
-        .querySelectorAll(".view")
-        .forEach(v=>
-          v.classList.remove("on")
-        );
-
-
-      document
-        .getElementById(
-          "view-"+b.dataset.tab
-        )
-        .classList.add("on");
-
-
-      openSide(false);
-
-    };
-
-  });
-
-
-document.getElementById(
-  "tabMine"
-).onclick=()=>{
-
-  document
-    .querySelectorAll(".nav button")
-    .forEach(x=>
-      x.classList.remove("on")
-    );
-
-
-  document
-    .getElementById("tabMine")
-    .classList.add("on");
-
-
-  document
-    .querySelectorAll(".view")
-    .forEach(v=>
-      v.classList.remove("on")
-    );
-
-
-  document
-    .getElementById("view-mine")
-    .classList.add("on");
-
-
-  openSide(true);
-
 };
-
-
-document.getElementById(
-  "openMine"
-).onclick=()=>{
-
-  openSide(true);
-
-};
-
-
-document.getElementById(
-  "mask"
-).onclick=()=>openSide(false);
-
-
 /* =========================================================
    SHEET
 ========================================================= */
-
-document
-  .querySelectorAll("[data-sheet]")
-  .forEach(b=>{
-
-    b.onclick=()=>{
-
-      const x=T();
-
-      setText(
-        "sheetTitle",
-        x.sheet
-      );
-
-      setText(
-        "sheetBody",
-        x.sheetBody
-      );
-
-
-      document
-        .getElementById("sheet")
-        .classList.add("on");
-
-
-      document
-        .getElementById("mask")
-        .classList.add("on");
-
-    };
-
-  });
-
-
-document.getElementById(
-  "sheetClose"
-).onclick=()=>{
-
-  document
-    .getElementById("sheet")
-    .classList.remove("on");
-
-  document
-    .getElementById("mask")
-    .classList.remove("on");
-
+function openSheet(title,bodyHtml){
+setText("sheetTitle",title);
+const b=document.getElementById("sheetBody");
+if(b)b.innerHTML=bodyHtml||"";
+document.getElementById("sheet").classList.add("on");
+document.getElementById("mask").classList.add("on");
+}
+function closeSheet(){
+document.getElementById("sheet").classList.remove("on");
+document.getElementById("mask").classList.remove("on");
+}
+/* =========================================================
+   LANGUAGE PICKER
+========================================================= */
+function openLanguageSheet(){
+const items=LANGUAGES.map(L=>{
+const on=L.code===language?" on":"";
+return '<button class="lang-item'+on+'" data-lang="'+esc(L.code)+'"><span>'+esc(L.label)+'</span><span class="lang-code">'+esc(L.code)+'</span></button>';
+}).join("");
+openSheet(t("chooseLanguage","Choose language"),'<div class="lang-list">'+items+'</div>');
+const box=document.getElementById("sheetBody");
+box.querySelectorAll("[data-lang]").forEach(b=>{
+b.onclick=()=>{setLanguage(b.dataset.lang);closeSheet();};
+});
+}
+function setLanguage(code){
+if(!LANGUAGES.some(L=>L.code===code))code="en";
+language=code;
+try{localStorage.setItem("hw-language",code);}catch(e){}
+applyLanguage();
+}
+/* =========================================================
+   VERIFY
+========================================================= */
+window.verifyResult=async function(){
+if(!resultData||!resultData.res){
+openSheet(t("none","No result available to verify"),"");
+return;
+}
+if(!hasSubtle()){
+openSheet(t("error","Data fetch failed"),esc(t("cryptoError","SHA-256 requires a secure context (HTTPS)")));
+return;
+}
+let hash,res;
+try{
+hash=await sha256(resultData.orig);
+res=await fair3(resultData.orig);
+}catch(e){
+openSheet(t("fail","Verification failed"),esc(String(e&&e.message||e)));
+return;
+}
+const ok=(hash===resultData.sha)&&(res===resultData.res);
+const body='<div class="mono">'+esc(resultData.orig)+'</div><div class="mono" style="margin-top:8px">SHA-256: '+esc(hash)+'</div><div class="mono" style="margin-top:8px">RESULT : '+esc(res)+'</div>';
+openSheet(t(ok?"pass":"fail",ok?"Verification passed":"Verification failed"),body);
 };
-
-
+/* =========================================================
+   ESCAPE
+========================================================= */
+function esc(s){
+return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+}
+/* =========================================================
+   SPONSORS
+========================================================= */
+function renderSponsors(source){
+currentSponsorSource=source||"inline";
+const box=document.getElementById("sponsorList");
+if(!box)return;
+box.innerHTML="";
+sponsors.forEach(s=>{
+const a=document.createElement("a");
+a.className="sponsor sp";
+a.href=s.url||"#";
+if(s.url&&s.url!=="#"){
+a.target="_blank";
+a.rel="noopener noreferrer";
+}
+a.style.setProperty("--a",s.a||"#e7c27a");
+a.style.setProperty("--b",s.b||"#b8894a");
+a.innerHTML='<div class="mark">'+esc(s.mark||String(s.name||"").slice(0,2))+'</div><div><strong>'+esc(s.name)+'</strong><span>'+esc(s.desc||"")+'</span></div>';
+box.appendChild(a);
+});
+setText("sponsorSource",currentSponsorSource.toUpperCase());
+const srcLabel=currentSponsorSource||"inline";
+const fb="Source "+srcLabel+" · upload sponsors.json to be crawled";
+setText("sponsorFeedNote",t("sponsorFeed",fb,{src:srcLabel}));
+}
+async function crawlSponsors(){
+const feeds=[].concat(DRAW.sponsorFeeds||[],DRAW.sponsorsFeed||[]).filter(Boolean);
+for(const url of feeds){
+try{
+const r=await fetch(url,{cache:"no-store"});
+if(!r.ok)continue;
+const data=await r.json();
+const list=Array.isArray(data)?data:(data.sponsors||data.items||[]);
+if(list.length){
+sponsors=list;
+renderSponsors(url);
+return;
+}
+}catch(e){}
+}
+renderSponsors("inline");
+}
+/* =========================================================
+   SIDE / NAV
+========================================================= */
+function openSide(on){
+document.getElementById("side").classList.toggle("on",on);
+document.getElementById("mask").classList.toggle("on",on);
+if(!on)closeSheet();
+}
+document.querySelectorAll(".nav button[data-tab]").forEach(b=>{
+b.onclick=()=>{
+document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("on"));
+b.classList.add("on");
+document.querySelectorAll(".view").forEach(v=>v.classList.remove("on"));
+document.getElementById("view-"+b.dataset.tab).classList.add("on");
+openSide(false);
+if(b.dataset.tab==="mine")openSide(true);
+};
+});
+document.getElementById("openMine").onclick=()=>openSide(true);
+document.getElementById("mask").onclick=()=>openSide(false);
+document.getElementById("sheetClose").onclick=closeSheet;
+document.getElementById("langBtn").onclick=openLanguageSheet;
 /* =========================================================
    THEME
 ========================================================= */
-
-try{
-
-  const th=
-    localStorage.getItem("hw-theme");
-
-  if([
-    "midnight",
-    "dark",
-    "light",
-    "aurora"
-  ].includes(th)){
-
-    document
-      .documentElement
-      .dataset
-      .theme=th;
-
-  }
-
-}catch(e){}
-
-
+const metaTheme=document.getElementById("metaThemeColor");
+function applyTheme(name){
+document.documentElement.dataset.theme=name;
+try{localStorage.setItem("hw-theme",name);}catch(e){}
+if(metaTheme){
+const css=getComputedStyle(document.documentElement).getPropertyValue("--meta").trim();
+if(css)metaTheme.setAttribute("content",css);
+}
+}
+(function initTheme(){
+let saved="midnight";
+try{saved=localStorage.getItem("hw-theme")||"midnight";}catch(e){}
+if(!THEMES.includes(saved))saved="midnight";
+applyTheme(saved);
+})();
+document.getElementById("themeBtn").onclick=()=>{
+const cur=document.documentElement.dataset.theme||"midnight";
+const i=THEMES.indexOf(cur);
+applyTheme(THEMES[(i+1)%THEMES.length]);
+};
 /* =========================================================
-   LANGUAGE FROM STORAGE
+   LANGUAGE DETECTION & INIT
 ========================================================= */
-
+function detectLanguage(){
+const list=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||"en"];
+const codes=LANGUAGES.map(L=>L.code);
+const codesLower=codes.map(c=>c.toLowerCase());
+for(const raw of list){
+if(!raw)continue;
+const tag=String(raw).trim();
+const lower=tag.toLowerCase();
+const idxExact=codesLower.indexOf(lower);
+if(idxExact>=0)return codes[idxExact];
+if(lower.startsWith("zh")){
+if(/hant|tw|hk|mo/i.test(tag))return "zh-TW";
+return "zh-CN";
+}
+const base=lower.split("-")[0];
+const idxBase=codesLower.findIndex(c=>c===base);
+if(idxBase>=0)return codes[idxBase];
+}
+return "en";
+}
+(function initLanguage(){
+let saved=null;
+try{saved=localStorage.getItem("hw-language");}catch(e){}
 try{
-
-  const lg=
-    localStorage.getItem(
-      "hw-language"
-    );
-
-  if(LANG[lg]){
-
-    language=lg;
-
-  }
-
+const q=new URLSearchParams(location.search).get("lang");
+if(q)saved=q;
 }catch(e){}
-
-
+if(saved&&LANGUAGES.some(L=>L.code===saved))language=saved;
+else language=detectLanguage();
+})();
 /* =========================================================
-   LANGUAGE FROM URL
+   BOOT
 ========================================================= */
-
-try{
-
-  const q=
-    new URLSearchParams(
-      location.search
-    ).get("lang");
-
-  if(LANG[q]){
-
-    language=q;
-
-  }
-
-}catch(e){}
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
 applyLanguage();
-
 crawlSponsors();
-
-/*
-  这里初始化只调用 tick()。
-  tick() 会发现 currentRound === null，
-  然后自动调用 fetchChains(round)。
-
-  不再额外执行 fetchChains()，
-  从而避免第一次页面加载发送两套相同请求。
-*/
-
 tick();
-
-setInterval(
-  tick,
-  1000
-);
-
+setInterval(tick,1000);
 })();
 </script>
-
 </body>
 </html>
